@@ -77,6 +77,7 @@ public class BaseController extends   BaseService {
     public String logOut( @ModelAttribute UserInfo userInfo, HttpServletRequest request) throws IOException {
         HttpSession session = request.getSession();
         session.invalidate();
+        System.out.print("1111");
         return "login";
 
     }

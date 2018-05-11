@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanglei.dao.PhysicalPropertyTestInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wanglei.model.PhysicalPropertyTestInfo" >
+    <id column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+    <result column="INSPECTOR_ID" property="inspectorId" jdbcType="VARCHAR" />
+    <result column="PROVING_TIME" property="provingTime" jdbcType="VARCHAR" />
+    <result column="PROVING_TYPE" property="provingType" jdbcType="VARCHAR" />
+    <result column="PROVING_RESULT" property="provingResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SAMPLE_ID, BATCH_ID, INSPECTOR_ID, PROVING_TIME, PROVING_TYPE, PROVING_RESULT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanglei.model.PhysicalPropertyTestInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PHYSICAL_PROPERTY_TEST_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PHYSICAL_PROPERTY_TEST_INFO
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PHYSICAL_PROPERTY_TEST_INFO
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wanglei.model.PhysicalPropertyTestInfoExample" >
+    delete from PHYSICAL_PROPERTY_TEST_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wanglei.model.PhysicalPropertyTestInfo" >
+    insert into PHYSICAL_PROPERTY_TEST_INFO (SAMPLE_ID, BATCH_ID, INSPECTOR_ID, 
+      PROVING_TIME, PROVING_TYPE, PROVING_RESULT
+      )
+    values (#{sampleId,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, #{inspectorId,jdbcType=VARCHAR}, 
+      #{provingTime,jdbcType=VARCHAR}, #{provingType,jdbcType=VARCHAR}, #{provingResult,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanglei.model.PhysicalPropertyTestInfo" >
+    insert into PHYSICAL_PROPERTY_TEST_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sampleId != null" >
+        SAMPLE_ID,
+      </if>
+      <if test="batchId != null" >
+        BATCH_ID,
+      </if>
+      <if test="inspectorId != null" >
+        INSPECTOR_ID,
+      </if>
+      <if test="provingTime != null" >
+        PROVING_TIME,
+      </if>
+      <if test="provingType != null" >
+        PROVING_TYPE,
+      </if>
+      <if test="provingResult != null" >
+        PROVING_RESULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sampleId != null" >
+        #{sampleId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectorId != null" >
+        #{inspectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="provingTime != null" >
+        #{provingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="provingType != null" >
+        #{provingType,jdbcType=VARCHAR},
+      </if>
+      <if test="provingResult != null" >
+        #{provingResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wanglei.model.PhysicalPropertyTestInfoExample" resultType="java.lang.Integer" >
+    select count(*) from PHYSICAL_PROPERTY_TEST_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanglei.model.PhysicalPropertyTestInfo" >
+    update PHYSICAL_PROPERTY_TEST_INFO
+    <set >
+      <if test="batchId != null" >
+        BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectorId != null" >
+        INSPECTOR_ID = #{inspectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="provingTime != null" >
+        PROVING_TIME = #{provingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="provingType != null" >
+        PROVING_TYPE = #{provingType,jdbcType=VARCHAR},
+      </if>
+      <if test="provingResult != null" >
+        PROVING_RESULT = #{provingResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanglei.model.PhysicalPropertyTestInfo" >
+    update PHYSICAL_PROPERTY_TEST_INFO
+    set BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      INSPECTOR_ID = #{inspectorId,jdbcType=VARCHAR},
+      PROVING_TIME = #{provingTime,jdbcType=VARCHAR},
+      PROVING_TYPE = #{provingType,jdbcType=VARCHAR},
+      PROVING_RESULT = #{provingResult,jdbcType=VARCHAR}
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanglei.dao.HeatingTechInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wanglei.model.HeatingTechInfo" >
+    <id column="HEAT_TREATMENT_INFO_ID" property="heatTreatmentInfoId" jdbcType="VARCHAR" />
+    <result column="HEAT_TREATMENT_TYPE" property="heatTreatmentType" jdbcType="VARCHAR" />
+    <result column="TEMPERATURE" property="temperature" jdbcType="VARCHAR" />
+    <result column="HOLDING_TIME" property="holdingTime" jdbcType="VARCHAR" />
+    <result column="LOADING_TIMES" property="loadingTimes" jdbcType="VARCHAR" />
+    <result column="HEATING_MEDIUM" property="heatingMedium" jdbcType="VARCHAR" />
+    <result column="QUENCHANT" property="quenchant" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    HEAT_TREATMENT_INFO_ID, HEAT_TREATMENT_TYPE, TEMPERATURE, HOLDING_TIME, LOADING_TIMES, 
+    HEATING_MEDIUM, QUENCHANT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanglei.model.HeatingTechInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from HEATING_TECH_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from HEATING_TECH_INFO
+    where HEAT_TREATMENT_INFO_ID = #{heatTreatmentInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from HEATING_TECH_INFO
+    where HEAT_TREATMENT_INFO_ID = #{heatTreatmentInfoId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wanglei.model.HeatingTechInfoExample" >
+    delete from HEATING_TECH_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wanglei.model.HeatingTechInfo" >
+    insert into HEATING_TECH_INFO (HEAT_TREATMENT_INFO_ID, HEAT_TREATMENT_TYPE, 
+      TEMPERATURE, HOLDING_TIME, LOADING_TIMES, 
+      HEATING_MEDIUM, QUENCHANT)
+    values (#{heatTreatmentInfoId,jdbcType=VARCHAR}, #{heatTreatmentType,jdbcType=VARCHAR}, 
+      #{temperature,jdbcType=VARCHAR}, #{holdingTime,jdbcType=VARCHAR}, #{loadingTimes,jdbcType=VARCHAR}, 
+      #{heatingMedium,jdbcType=VARCHAR}, #{quenchant,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanglei.model.HeatingTechInfo" >
+    insert into HEATING_TECH_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="heatTreatmentInfoId != null" >
+        HEAT_TREATMENT_INFO_ID,
+      </if>
+      <if test="heatTreatmentType != null" >
+        HEAT_TREATMENT_TYPE,
+      </if>
+      <if test="temperature != null" >
+        TEMPERATURE,
+      </if>
+      <if test="holdingTime != null" >
+        HOLDING_TIME,
+      </if>
+      <if test="loadingTimes != null" >
+        LOADING_TIMES,
+      </if>
+      <if test="heatingMedium != null" >
+        HEATING_MEDIUM,
+      </if>
+      <if test="quenchant != null" >
+        QUENCHANT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="heatTreatmentInfoId != null" >
+        #{heatTreatmentInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="heatTreatmentType != null" >
+        #{heatTreatmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null" >
+        #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="holdingTime != null" >
+        #{holdingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingTimes != null" >
+        #{loadingTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="heatingMedium != null" >
+        #{heatingMedium,jdbcType=VARCHAR},
+      </if>
+      <if test="quenchant != null" >
+        #{quenchant,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wanglei.model.HeatingTechInfoExample" resultType="java.lang.Integer" >
+    select count(*) from HEATING_TECH_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanglei.model.HeatingTechInfo" >
+    update HEATING_TECH_INFO
+    <set >
+      <if test="heatTreatmentType != null" >
+        HEAT_TREATMENT_TYPE = #{heatTreatmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null" >
+        TEMPERATURE = #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="holdingTime != null" >
+        HOLDING_TIME = #{holdingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingTimes != null" >
+        LOADING_TIMES = #{loadingTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="heatingMedium != null" >
+        HEATING_MEDIUM = #{heatingMedium,jdbcType=VARCHAR},
+      </if>
+      <if test="quenchant != null" >
+        QUENCHANT = #{quenchant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where HEAT_TREATMENT_INFO_ID = #{heatTreatmentInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanglei.model.HeatingTechInfo" >
+    update HEATING_TECH_INFO
+    set HEAT_TREATMENT_TYPE = #{heatTreatmentType,jdbcType=VARCHAR},
+      TEMPERATURE = #{temperature,jdbcType=VARCHAR},
+      HOLDING_TIME = #{holdingTime,jdbcType=VARCHAR},
+      LOADING_TIMES = #{loadingTimes,jdbcType=VARCHAR},
+      HEATING_MEDIUM = #{heatingMedium,jdbcType=VARCHAR},
+      QUENCHANT = #{quenchant,jdbcType=VARCHAR}
+    where HEAT_TREATMENT_INFO_ID = #{heatTreatmentInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

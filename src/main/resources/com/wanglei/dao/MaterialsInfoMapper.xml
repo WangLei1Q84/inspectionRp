@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanglei.dao.MaterialsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wanglei.model.MaterialsInfo" >
+    <id column="MATERIALS_ID" property="materialsId" jdbcType="VARCHAR" />
+    <result column="MATERIALS_NAME" property="materialsName" jdbcType="VARCHAR" />
+    <result column="MATERIALS_HEAT_NO" property="materialsHeatNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MATERIALS_ID, MATERIALS_NAME, MATERIALS_HEAT_NO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanglei.model.MaterialsInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from MATERIALS_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MATERIALS_INFO
+    where MATERIALS_ID = #{materialsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MATERIALS_INFO
+    where MATERIALS_ID = #{materialsId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wanglei.model.MaterialsInfoExample" >
+    delete from MATERIALS_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wanglei.model.MaterialsInfo" >
+    insert into MATERIALS_INFO (MATERIALS_ID, MATERIALS_NAME, MATERIALS_HEAT_NO
+      )
+    values (#{materialsId,jdbcType=VARCHAR}, #{materialsName,jdbcType=VARCHAR}, #{materialsHeatNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanglei.model.MaterialsInfo" >
+    insert into MATERIALS_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="materialsId != null" >
+        MATERIALS_ID,
+      </if>
+      <if test="materialsName != null" >
+        MATERIALS_NAME,
+      </if>
+      <if test="materialsHeatNo != null" >
+        MATERIALS_HEAT_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="materialsId != null" >
+        #{materialsId,jdbcType=VARCHAR},
+      </if>
+      <if test="materialsName != null" >
+        #{materialsName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialsHeatNo != null" >
+        #{materialsHeatNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wanglei.model.MaterialsInfoExample" resultType="java.lang.Integer" >
+    select count(*) from MATERIALS_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanglei.model.MaterialsInfo" >
+    update MATERIALS_INFO
+    <set >
+      <if test="materialsName != null" >
+        MATERIALS_NAME = #{materialsName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialsHeatNo != null" >
+        MATERIALS_HEAT_NO = #{materialsHeatNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MATERIALS_ID = #{materialsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanglei.model.MaterialsInfo" >
+    update MATERIALS_INFO
+    set MATERIALS_NAME = #{materialsName,jdbcType=VARCHAR},
+      MATERIALS_HEAT_NO = #{materialsHeatNo,jdbcType=VARCHAR}
+    where MATERIALS_ID = #{materialsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

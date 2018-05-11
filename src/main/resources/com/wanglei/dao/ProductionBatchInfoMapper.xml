@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanglei.dao.ProductionBatchInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wanglei.model.ProductionBatchInfo" >
+    <id column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="MATERIALS_ID" property="materialsId" jdbcType="VARCHAR" />
+    <result column="HEAT_NO" property="heatNo" jdbcType="VARCHAR" />
+    <result column="TRIM_SIZE" property="trimSize" jdbcType="VARCHAR" />
+    <result column="HEAT_TREATMENT_DATE" property="heatTreatmentDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BATCH_ID, PRODUCT_ID, MATERIALS_ID, HEAT_NO, TRIM_SIZE, HEAT_TREATMENT_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanglei.model.ProductionBatchInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PRODUCTION_BATCH_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PRODUCTION_BATCH_INFO
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PRODUCTION_BATCH_INFO
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wanglei.model.ProductionBatchInfoExample" >
+    delete from PRODUCTION_BATCH_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wanglei.model.ProductionBatchInfo" >
+    insert into PRODUCTION_BATCH_INFO (BATCH_ID, PRODUCT_ID, MATERIALS_ID, 
+      HEAT_NO, TRIM_SIZE, HEAT_TREATMENT_DATE
+      )
+    values (#{batchId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{materialsId,jdbcType=VARCHAR}, 
+      #{heatNo,jdbcType=VARCHAR}, #{trimSize,jdbcType=VARCHAR}, #{heatTreatmentDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanglei.model.ProductionBatchInfo" >
+    insert into PRODUCTION_BATCH_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="batchId != null" >
+        BATCH_ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="materialsId != null" >
+        MATERIALS_ID,
+      </if>
+      <if test="heatNo != null" >
+        HEAT_NO,
+      </if>
+      <if test="trimSize != null" >
+        TRIM_SIZE,
+      </if>
+      <if test="heatTreatmentDate != null" >
+        HEAT_TREATMENT_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="materialsId != null" >
+        #{materialsId,jdbcType=VARCHAR},
+      </if>
+      <if test="heatNo != null" >
+        #{heatNo,jdbcType=VARCHAR},
+      </if>
+      <if test="trimSize != null" >
+        #{trimSize,jdbcType=VARCHAR},
+      </if>
+      <if test="heatTreatmentDate != null" >
+        #{heatTreatmentDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wanglei.model.ProductionBatchInfoExample" resultType="java.lang.Integer" >
+    select count(*) from PRODUCTION_BATCH_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanglei.model.ProductionBatchInfo" >
+    update PRODUCTION_BATCH_INFO
+    <set >
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="materialsId != null" >
+        MATERIALS_ID = #{materialsId,jdbcType=VARCHAR},
+      </if>
+      <if test="heatNo != null" >
+        HEAT_NO = #{heatNo,jdbcType=VARCHAR},
+      </if>
+      <if test="trimSize != null" >
+        TRIM_SIZE = #{trimSize,jdbcType=VARCHAR},
+      </if>
+      <if test="heatTreatmentDate != null" >
+        HEAT_TREATMENT_DATE = #{heatTreatmentDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanglei.model.ProductionBatchInfo" >
+    update PRODUCTION_BATCH_INFO
+    set PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      MATERIALS_ID = #{materialsId,jdbcType=VARCHAR},
+      HEAT_NO = #{heatNo,jdbcType=VARCHAR},
+      TRIM_SIZE = #{trimSize,jdbcType=VARCHAR},
+      HEAT_TREATMENT_DATE = #{heatTreatmentDate,jdbcType=VARCHAR}
+    where BATCH_ID = #{batchId,jdbcType=VARCHAR}
+  </update>
+</mapper>

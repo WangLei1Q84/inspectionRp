@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanglei.dao.PassivationTestInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wanglei.model.PassivationTestInfo" >
+    <id column="PASSIVATION_ID" property="passivationId" jdbcType="VARCHAR" />
+    <result column="PASSIVATION_TYPE" property="passivationType" jdbcType="VARCHAR" />
+    <result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+    <result column="INSPECTOR_ID" property="inspectorId" jdbcType="VARCHAR" />
+    <result column="PROVING_TIME" property="provingTime" jdbcType="VARCHAR" />
+    <result column="VISUAL_PROVING_TIME" property="visualProvingTime" jdbcType="VARCHAR" />
+    <result column="PASSIVATION_TIME" property="passivationTime" jdbcType="VARCHAR" />
+    <result column="PASSIVATION_TECH_STANDARD" property="passivationTechStandard" jdbcType="VARCHAR" />
+    <result column="TEST_BOX_TEMPERATURE" property="testBoxTemperature" jdbcType="VARCHAR" />
+    <result column="SPRAY_TOWER_TEMPERATURE" property="sprayTowerTemperature" jdbcType="VARCHAR" />
+    <result column="SPRAY_PRESSURE" property="sprayPressure" jdbcType="VARCHAR" />
+    <result column="SALT_WATER_NUM" property="saltWaterNum" jdbcType="VARCHAR" />
+    <result column="SALT_WATER_DENSITY_TEMPERATURE" property="saltWaterDensityTemperature" jdbcType="VARCHAR" />
+    <result column="SALT_WATER_PH" property="saltWaterPh" jdbcType="VARCHAR" />
+    <result column="PROVING_RESULT" property="provingResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PASSIVATION_ID, PASSIVATION_TYPE, BATCH_ID, INSPECTOR_ID, PROVING_TIME, VISUAL_PROVING_TIME, 
+    PASSIVATION_TIME, PASSIVATION_TECH_STANDARD, TEST_BOX_TEMPERATURE, SPRAY_TOWER_TEMPERATURE, 
+    SPRAY_PRESSURE, SALT_WATER_NUM, SALT_WATER_DENSITY_TEMPERATURE, SALT_WATER_PH, PROVING_RESULT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanglei.model.PassivationTestInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PASSIVATION_TEST_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PASSIVATION_TEST_INFO
+    where PASSIVATION_ID = #{passivationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PASSIVATION_TEST_INFO
+    where PASSIVATION_ID = #{passivationId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wanglei.model.PassivationTestInfoExample" >
+    delete from PASSIVATION_TEST_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wanglei.model.PassivationTestInfo" >
+    insert into PASSIVATION_TEST_INFO (PASSIVATION_ID, PASSIVATION_TYPE, BATCH_ID, 
+      INSPECTOR_ID, PROVING_TIME, VISUAL_PROVING_TIME, 
+      PASSIVATION_TIME, PASSIVATION_TECH_STANDARD, 
+      TEST_BOX_TEMPERATURE, SPRAY_TOWER_TEMPERATURE, 
+      SPRAY_PRESSURE, SALT_WATER_NUM, SALT_WATER_DENSITY_TEMPERATURE, 
+      SALT_WATER_PH, PROVING_RESULT)
+    values (#{passivationId,jdbcType=VARCHAR}, #{passivationType,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, 
+      #{inspectorId,jdbcType=VARCHAR}, #{provingTime,jdbcType=VARCHAR}, #{visualProvingTime,jdbcType=VARCHAR}, 
+      #{passivationTime,jdbcType=VARCHAR}, #{passivationTechStandard,jdbcType=VARCHAR}, 
+      #{testBoxTemperature,jdbcType=VARCHAR}, #{sprayTowerTemperature,jdbcType=VARCHAR}, 
+      #{sprayPressure,jdbcType=VARCHAR}, #{saltWaterNum,jdbcType=VARCHAR}, #{saltWaterDensityTemperature,jdbcType=VARCHAR}, 
+      #{saltWaterPh,jdbcType=VARCHAR}, #{provingResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanglei.model.PassivationTestInfo" >
+    insert into PASSIVATION_TEST_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="passivationId != null" >
+        PASSIVATION_ID,
+      </if>
+      <if test="passivationType != null" >
+        PASSIVATION_TYPE,
+      </if>
+      <if test="batchId != null" >
+        BATCH_ID,
+      </if>
+      <if test="inspectorId != null" >
+        INSPECTOR_ID,
+      </if>
+      <if test="provingTime != null" >
+        PROVING_TIME,
+      </if>
+      <if test="visualProvingTime != null" >
+        VISUAL_PROVING_TIME,
+      </if>
+      <if test="passivationTime != null" >
+        PASSIVATION_TIME,
+      </if>
+      <if test="passivationTechStandard != null" >
+        PASSIVATION_TECH_STANDARD,
+      </if>
+      <if test="testBoxTemperature != null" >
+        TEST_BOX_TEMPERATURE,
+      </if>
+      <if test="sprayTowerTemperature != null" >
+        SPRAY_TOWER_TEMPERATURE,
+      </if>
+      <if test="sprayPressure != null" >
+        SPRAY_PRESSURE,
+      </if>
+      <if test="saltWaterNum != null" >
+        SALT_WATER_NUM,
+      </if>
+      <if test="saltWaterDensityTemperature != null" >
+        SALT_WATER_DENSITY_TEMPERATURE,
+      </if>
+      <if test="saltWaterPh != null" >
+        SALT_WATER_PH,
+      </if>
+      <if test="provingResult != null" >
+        PROVING_RESULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="passivationId != null" >
+        #{passivationId,jdbcType=VARCHAR},
+      </if>
+      <if test="passivationType != null" >
+        #{passivationType,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectorId != null" >
+        #{inspectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="provingTime != null" >
+        #{provingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="visualProvingTime != null" >
+        #{visualProvingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passivationTime != null" >
+        #{passivationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passivationTechStandard != null" >
+        #{passivationTechStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="testBoxTemperature != null" >
+        #{testBoxTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="sprayTowerTemperature != null" >
+        #{sprayTowerTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="sprayPressure != null" >
+        #{sprayPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="saltWaterNum != null" >
+        #{saltWaterNum,jdbcType=VARCHAR},
+      </if>
+      <if test="saltWaterDensityTemperature != null" >
+        #{saltWaterDensityTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="saltWaterPh != null" >
+        #{saltWaterPh,jdbcType=VARCHAR},
+      </if>
+      <if test="provingResult != null" >
+        #{provingResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wanglei.model.PassivationTestInfoExample" resultType="java.lang.Integer" >
+    select count(*) from PASSIVATION_TEST_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanglei.model.PassivationTestInfo" >
+    update PASSIVATION_TEST_INFO
+    <set >
+      <if test="passivationType != null" >
+        PASSIVATION_TYPE = #{passivationType,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectorId != null" >
+        INSPECTOR_ID = #{inspectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="provingTime != null" >
+        PROVING_TIME = #{provingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="visualProvingTime != null" >
+        VISUAL_PROVING_TIME = #{visualProvingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passivationTime != null" >
+        PASSIVATION_TIME = #{passivationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="passivationTechStandard != null" >
+        PASSIVATION_TECH_STANDARD = #{passivationTechStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="testBoxTemperature != null" >
+        TEST_BOX_TEMPERATURE = #{testBoxTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="sprayTowerTemperature != null" >
+        SPRAY_TOWER_TEMPERATURE = #{sprayTowerTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="sprayPressure != null" >
+        SPRAY_PRESSURE = #{sprayPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="saltWaterNum != null" >
+        SALT_WATER_NUM = #{saltWaterNum,jdbcType=VARCHAR},
+      </if>
+      <if test="saltWaterDensityTemperature != null" >
+        SALT_WATER_DENSITY_TEMPERATURE = #{saltWaterDensityTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="saltWaterPh != null" >
+        SALT_WATER_PH = #{saltWaterPh,jdbcType=VARCHAR},
+      </if>
+      <if test="provingResult != null" >
+        PROVING_RESULT = #{provingResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PASSIVATION_ID = #{passivationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanglei.model.PassivationTestInfo" >
+    update PASSIVATION_TEST_INFO
+    set PASSIVATION_TYPE = #{passivationType,jdbcType=VARCHAR},
+      BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      INSPECTOR_ID = #{inspectorId,jdbcType=VARCHAR},
+      PROVING_TIME = #{provingTime,jdbcType=VARCHAR},
+      VISUAL_PROVING_TIME = #{visualProvingTime,jdbcType=VARCHAR},
+      PASSIVATION_TIME = #{passivationTime,jdbcType=VARCHAR},
+      PASSIVATION_TECH_STANDARD = #{passivationTechStandard,jdbcType=VARCHAR},
+      TEST_BOX_TEMPERATURE = #{testBoxTemperature,jdbcType=VARCHAR},
+      SPRAY_TOWER_TEMPERATURE = #{sprayTowerTemperature,jdbcType=VARCHAR},
+      SPRAY_PRESSURE = #{sprayPressure,jdbcType=VARCHAR},
+      SALT_WATER_NUM = #{saltWaterNum,jdbcType=VARCHAR},
+      SALT_WATER_DENSITY_TEMPERATURE = #{saltWaterDensityTemperature,jdbcType=VARCHAR},
+      SALT_WATER_PH = #{saltWaterPh,jdbcType=VARCHAR},
+      PROVING_RESULT = #{provingResult,jdbcType=VARCHAR}
+    where PASSIVATION_ID = #{passivationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

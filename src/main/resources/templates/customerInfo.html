@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Tables</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- Bootstrap Core CSS -->
+	<link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<!-- Custom CSS -->
+	<link href="/css/style.css" rel='stylesheet' type='text/css' />
+	<!-- Graph CSS -->
+	<link href="/css/font-awesome.css" rel="stylesheet">
+	<!-- jQuery -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+	<!-- lined-icons -->
+	<link rel="stylesheet" href="/css/icon-font.min.css" type='text/css' />
+	<!-- /js -->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+	<!-- //js-->
+</head>
+<body>
+<div class="page-container">
+	<!--/content-inner-->
+	<div class="left-content">
+		<div class="inner-content">
+			<div class="outter-wp">
+				<div class="graph-visual tables-main">
+					<h2 class="inner-tittle ">客户信息管理</h2>
+					<div class="graph">
+						<table id="pbocDetail" class="layui-table" ></table>
+					</div>
+				</div>
+			</div>
+			<div th:include="footer :: footer"></div>
+		</div>
+	</div>
+	<div th:include="sidebar-menu :: ((${session.user.userRole} == '01')?'admin_sidebar-menu':'user_sidebar-menu')"></div>
+</div>
+<!--js -->
+<script src="/js/jquery.nicescroll.js"></script>
+<script src="/js/scripts.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

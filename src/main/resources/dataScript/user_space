@@ -1,0 +1,39 @@
+CREATE TEMPORARY TABLESPACE crm_tem
+
+         TEMPFILE 'E:\datafile\crm\crm_tem.DBF'
+
+         SIZE 32M
+
+         AUTOEXTEND ON
+
+         NEXT 32M MAXSIZE UNLIMITED
+
+         EXTENT MANAGEMENT LOCAL;
+
+
+CREATE TABLESPACE crm_data
+
+         LOGGING
+
+         DATAFILE 'E:\datafile\crm\crm_data'
+
+         SIZE 32M
+
+         AUTOEXTEND ON
+
+         NEXT 32M MAXSIZE UNLIMITED
+
+         EXTENT MANAGEMENT LOCAL;
+
+
+
+ CREATE USER crm IDENTIFIED BY crm
+
+         ACCOUNT UNLOCK
+
+         DEFAULT TABLESPACE crm_data
+
+         TEMPORARY TABLESPACE crm_tem;
+
+
+GRANT CONNECT,RESOURCE,DBA TO crm;

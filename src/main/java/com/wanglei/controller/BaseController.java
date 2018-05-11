@@ -42,6 +42,7 @@ public class BaseController extends   BaseService {
             u.setRealName("张三"+i);
             u.setCompany("xx公司"+i);
             u.setPhone("130xxxxxxxx"+i);
+            //sss
             userList.add(u);
         }
         beanParams.put("title", "用户信息11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
